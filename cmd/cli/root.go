@@ -15,12 +15,12 @@ func Execute() error {
 	return rootCmd.Execute()
 }
 
-func initlializeCli() error {
+func InitializeCli() error {
 
 	err := Execute()
 
 	if err != nil {
-		return fmt.Errorf("Error executing root command: %v", err)
+		return fmt.Errorf("error executing root command: %v", err)
 	}
 
 	initializeCmds()
