@@ -1,4 +1,4 @@
-module github.com/NilayYadav/agentos.git
+module github.com/NilayYadav/agentos
 
 go 1.23.4
 
