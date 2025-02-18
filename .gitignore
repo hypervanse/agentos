@@ -1,0 +1,12 @@
+tmp/*
+*.gob
+__pycache__
+*.tmp
+.secrets
+.venv
+venv
+.python-version
+.DS_Store
+test
+okteto.yaml
+.vscode/launch.json

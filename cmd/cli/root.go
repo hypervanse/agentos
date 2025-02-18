@@ -17,13 +17,13 @@ func Execute() error {
 
 func InitializeCli() error {
 
+	initializeCmds()
+
 	err := Execute()
 
 	if err != nil {
 		return fmt.Errorf("error executing root command: %v", err)
 	}
-
-	initializeCmds()
 
 	return nil
 }
