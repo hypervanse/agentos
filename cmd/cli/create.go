@@ -50,7 +50,9 @@ func runCreateContainer(cmd *cobra.Command, args []string) error {
 		logger.Error().Err(err).Msg("Failed to pull image")
 	}
 
-	c, err := manager.CreateContainer(ctx, name, image)
+	bundlePath := fmt.Sprintf("%s/bundle", image)
+
+	c, err := manager.CreateContainer(ctx, name, bundlePath)
 
 	if err != nil {
 		logger.Error().Err(err).Msg("Failed to create container")
