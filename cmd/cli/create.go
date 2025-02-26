@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/NilayYadav/agentos/pkg/image"
 	"github.com/NilayYadav/agentos/pkg/runtime/container"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -43,7 +44,13 @@ func runCreateContainer(cmd *cobra.Command, args []string) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	c, err := manager.CreateContainer(ctx, name)
+	image, err := image.PullBrowserlessImage(ctx, logger)
+
+	if err != nil {
+		logger.Error().Err(err).Msg("Failed to pull image")
+	}
+
+	c, err := manager.CreateContainer(ctx, name, image)
 
 	if err != nil {
 		logger.Error().Err(err).Msg("Failed to create container")
@@ -51,6 +58,13 @@ func runCreateContainer(cmd *cobra.Command, args []string) error {
 	}
 
 	logger.Info().Str("containerId", c.Id).Str("name", c.Name).Msg("Container created")
+
+	connectURL, err := manager.GetBrowserConnectURL(ctx)
+	if err != nil {
+		logger.Fatal().Err(err).Msg("Failed to get browser connect URL")
+	}
+
+	logger.Info().Str("connectURL", connectURL).Msg("Connect with Playwright using")
 
 	return nil
 }

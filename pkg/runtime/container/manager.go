@@ -3,8 +3,11 @@ package container
 import (
 	"context"
 	"fmt"
+	"os/exec"
 
 	"github.com/containerd/go-runc"
+	"github.com/google/shlex"
+	specs "github.com/opencontainers/runtime-spec/specs-go"
 	"github.com/rs/zerolog"
 )
 
@@ -27,30 +30,66 @@ func NewContainerManager(logger zerolog.Logger) *ContainerManager {
 	}
 }
 
-func (m *ContainerManager) CreateContainer(ctx context.Context, name string) (*Container, error) {
+func (m *ContainerManager) CreateContainer(ctx context.Context, name string, bundlePath string) (*Container, error) {
 
 	containerId := GenerateContainerUID()
 
-	bundleDir := "."
-
-	m.logger.Info().Str("containerId", containerId).Str("bundleDir", bundleDir).Msg("Creating container")
+	m.logger.Info().Str("containerId", containerId).Str("bundlePath", bundlePath).Msg("Creating container")
 
 	opts := &runc.CreateOpts{}
 
-	if err := m.runc.Create(ctx, containerId, bundleDir, opts); err != nil {
-		m.logger.Error().Err(err).Msg("Failed to create container")
-		return nil, fmt.Errorf("failed to create container: %w", err)
-	}
+	_, err := m.runc.Run(ctx, containerId, bundlePath, opts)
 
-	m.logger.Info().Str("containerId", containerId).Msg("Starting container")
-
-	if err := m.runc.Start(ctx, containerId); err != nil {
-		m.logger.Error().Err(err).Msg("Failed to start container")
-		return nil, fmt.Errorf("failed to start container: %w", err)
+	if err != nil {
+		m.logger.Error().Err(err).Msg("Failed to run container")
+		return nil, fmt.Errorf("failed to run container: %w", err)
 	}
 
 	return &Container{
 		Id:   containerId,
 		Name: name,
 	}, nil
+}
+
+func (m *ContainerManager) ExecuteCommand(ctx context.Context, containerID string, command string) error {
+	cmd := fmt.Sprintf("bash -c '%s'", command)
+	parsedCmd, err := shlex.Split(cmd)
+
+	if err != nil {
+		return fmt.Errorf("failed to parse command: %w", err)
+	}
+
+	execIO, err := runc.NewSTDIO()
+	if err != nil {
+		return fmt.Errorf("failed to create IO: %w", err)
+	}
+
+	processSpec := specs.Process{
+		Args: parsedCmd,
+		Env:  []string{"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"},
+		Cwd:  "/",
+	}
+
+	execOpts := &runc.ExecOpts{
+		IO: execIO,
+	}
+
+	err = m.runc.Exec(ctx, containerID, processSpec, execOpts)
+	if err != nil {
+		return fmt.Errorf("exec error: %w", err)
+	}
+
+	return nil
+}
+
+func (m *ContainerManager) GetBrowserConnectURL(ctx context.Context) (string, error) {
+
+	cmd := exec.Command("curl", "-s", "ifconfig.me")
+	ip, err := cmd.Output()
+
+	if err != nil {
+		return "", fmt.Errorf("failed to get IP: %w", err)
+	}
+
+	return fmt.Sprintf("ws://%s:3000", ip), nil
 }
