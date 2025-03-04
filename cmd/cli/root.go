@@ -30,4 +30,5 @@ func InitializeCli() error {
 
 func initializeCmds() {
 	rootCmd.AddCommand(newCreateCmd())
+	rootCmd.AddCommand(newExecCmd())
 }

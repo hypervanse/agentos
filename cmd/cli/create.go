@@ -61,7 +61,7 @@ func runCreateContainer(cmd *cobra.Command, args []string) error {
 
 	logger.Info().Str("containerId", c.Id).Str("name", c.Name).Msg("Container created")
 
-	connectURL, err := manager.GetBrowserConnectURL(ctx)
+	connectURL, err := manager.GetBrowserConnectURL(ctx, c.Id)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("Failed to get browser connect URL")
 	}

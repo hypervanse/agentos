@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	github.com/beam-cloud/go-runc v0.0.0-20250226192420-34dad0fdc737 // indirect
 	github.com/containerd/console v1.0.4 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect

@@ -1,3 +1,5 @@
+github.com/beam-cloud/go-runc v0.0.0-20250226192420-34dad0fdc737 h1:9dvNZag3gegzIl5i8W861lsnhnwz4joHr40K1HPcpmw=
+github.com/beam-cloud/go-runc v0.0.0-20250226192420-34dad0fdc737/go.mod h1:aw0zhDi28Hemve0raHcfU9suxZwkCpyNANOEwKZSSXo=
 github.com/containerd/console v1.0.4 h1:F2g4+oChYvBTsASRTz8NP6iIAi97J3TtSAsLbIFn4ro=
 github.com/containerd/console v1.0.4/go.mod h1:YynlIjWYF8myEu6sdkwKIvGQq+cOckRm6So2avqoYAk=
 github.com/containerd/go-runc v1.1.0 h1:OX4f+/i2y5sUT7LhmcJH7GYrjjhHa1QI4e8yO0gGleA=
