@@ -18,6 +18,9 @@
 - **Scalable Infrastructure**  
   Efficiently spawns, manages, and monitors multiple agents concurrently.
 
+- **Command Execution**  
+  Execute shell commands directly within a container for enhanced control and debugging.
+
 ## Getting Started
 
 > **Note:** Agent OS is currently in development. The features below reflect its initial capabilities, with more to come soon!
@@ -30,7 +33,7 @@ agentos create --name my-container
 
 This command sets up a containerized browser environment ready for agent operations, accessible at `IP-ADDRESS:3000`.
 
-## Integration Examples
+## Web Browser
 
 ### With Puppeteer
 
@@ -71,3 +74,32 @@ const browser = await pw.firefox.connect({
   wsEndpoint: 'ws://IP-ADDRESS:3000/firefox/playwright',
 });
 ```
+
+## Execute Command
+
+Run shell commands directly inside a running container using the `exec` command. This feature allows you to interact with the container environment seamlessly.
+
+### Usage
+
+```bash
+agentos exec --containerId <container-id> --cmd "<shell-command>"
+```
+
+### Example
+
+To execute a simple command like `echo Hello, World` in a container:
+
+```bash
+agentos exec --containerId mycontainerId --cmd "echo Hello, World"
+```
+
+### Details
+
+- **`--containerId` (required):** The ID of the container where the command will be executed.
+- **`--cmd` (required):** The shell command to run inside the container.
+- The container must be in a "running" state for the command to execute successfully.
+- Output from the command is logged for easy inspection.
+
+This feature is useful for debugging, testing, or performing one-off tasks within the containerized environment.
+
+---
