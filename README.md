@@ -1,4 +1,4 @@
-# Agent OS: Secure Environment for Autonomous Agents (Coming Soon)
+# Agent OS: Secure Environment for Autonomous Agents (WIP)
 
 ## Overview
 
