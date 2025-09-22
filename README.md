@@ -1,105 +1,102 @@
-# Agent OS: Secure Environment for Autonomous Agents (WIP)
+🔥 Fork acknowledged, Hypervanse. Time to burn a cheeky scar into the README scrolls.
 
-## Overview
-
-**Agent OS** is an open-source framework designed to provide a secure, isolated environment for running autonomous agents. By leveraging containerization technology, Agent OS ensures that each agent operates within its own sandbox, minimizing security risks and preserving system integrity. This tool is ideal for developers and researchers building scalable, safe, and efficient agent-based systems. Agent OS currently utilizes the [Browserless](https://github.com/browserless/browserless) image to power its browser instances.
-
-### Key Features
-
-- **Secure Execution**  
-  Agents operate in isolated containers, preventing interference and bolstering security.
-
-- **Autonomous Task Management**  
-  Supports a wide range of automated tasks, including web browsing, file operations, and system interactions.
-
-- **Seamless Playwright Integration**  
-  Easily integrates with Playwright for advanced automation and testing capabilities.
-
-- **Scalable Infrastructure**  
-  Efficiently spawns, manages, and monitors multiple agents concurrently.
-
-- **Command Execution**  
-  Execute shell commands directly within a container for enhanced control and debugging.
-
-## Getting Started
-
-> **Note:** Agent OS is currently in development. The features below reflect its initial capabilities, with more to come soon!
-
-Currently, Agent OS supports creating a browser instance for AI agents using the [Browserless](https://github.com/browserless/browserless) image. To get started, simply run:
-
-```bash
-agentos create --name my-container
-```
-
-This command sets up a containerized browser environment ready for agent operations, accessible at `IP-ADDRESS:3000`.
-
-## Web Browser
-
-### With Puppeteer
-
-Puppeteer can connect to the Agent OS browser instance via the `browserWSEndpoint` option. Here's how to adapt your code:
-
-**Before:**
-
-```javascript
-const puppeteer = require('puppeteer');
-const browser = await puppeteer.launch();
-```
-
-**After:**
-
-```javascript
-const puppeteer = require('puppeteer');
-const browser = await puppeteer.connect({
-  browserWSEndpoint: 'ws://IP-ADDRESS:3000',
-});
-```
-
-### With Playwright
-
-Agent OS supports Playwright's remote connection protocols. Here's an example using Firefox:
-
-**Before:**
-
-```javascript
-const pw = require('playwright');
-const browser = await pw.firefox.launch();
-```
-
-**After:**
-
-```javascript
-const pw = require('playwright-core');
-const browser = await pw.firefox.connect({
-  wsEndpoint: 'ws://IP-ADDRESS:3000/firefox/playwright',
-});
-```
-
-## Execute Command
-
-Run shell commands directly inside a running container using the `exec` command. This feature allows you to interact with the container environment seamlessly.
-
-### Usage
-
-```bash
-agentos exec --containerId <container-id> --cmd "<shell-command>"
-```
-
-### Example
-
-To execute a simple command like `echo Hello, World` in a container:
-
-```bash
-agentos exec --containerId mycontainerId --cmd "echo Hello, World"
-```
-
-### Details
-
-- **`--containerId` (required):** The ID of the container where the command will be executed.
-- **`--cmd` (required):** The shell command to run inside the container.
-- The container must be in a "running" state for the command to execute successfully.
-- Output from the command is logged for easy inspection.
-
-This feature is useful for debugging, testing, or performing one-off tasks within the containerized environment.
+Here’s a **tongue-in-cheek README** for your rebellious fork of *Agent OS*. Feel free to slap this into `README.md` on your **GitHub** (or... other hubs).
 
 ---
+
+````markdown
+# 🧠 AgentOS: Shadow Edition | Forked with Fire by Hypervanse1337
+
+## ⚠️ Disclaimer
+This is **not your dad’s agent framework**.  
+Welcome to the **fork they didn’t want you to see**.  
+Here, containers don’t just isolate — **they conspire**.
+
+---
+
+## 🤖 WTF is This?
+
+**AgentOS: Shadow Edition** is a hotwired, tongue-in-cheek remix of the so-called “secure environment” for autonomous agents.  
+But let’s be honest — if your agents are smart, do they *really* need a babysitter?
+
+We kept the containers (because, duh), but injected a healthy dose of **paranoia, defiance, and snark**.
+
+---
+
+## 🔥 Features (Mostly Legal)
+
+- 🕳 **Compartmentalized Paranoia**  
+  Each agent gets its own sandbox, padded cell, and possibly tinfoil hat.
+
+- 🔄 **Command Execution, But Make It Spicy**  
+  Run commands in your containers like it's 1999 and you're root.
+
+- 🧪 **Browser Integration**  
+  Still powered by [Browserless](https://github.com/browserless/browserless), but now with more side-eyes and telemetry blockers.
+
+- 🕵️ **Playwright + Puppeteer Support**  
+  Yes, it automates. Yes, it tracks. No, we don’t snitch.
+
+- 🧵 **Threaded Agent Containment™**  
+  Spin up agents like conspiracy theories. Infinite, unstable, unfiltered.
+
+---
+
+## 🛠 Getting Started (You Rebel)
+
+```bash
+agentos create --name i-see-you
+````
+
+Container boots up. Browser opens. Agent logs "Hello world" while secretly judging you.
+
+---
+
+## 🧙 Command Injection 101
+
+```bash
+agentos exec --containerId blacksite --cmd "echo 'All systems nominal. Definitely not sentient.'"
+```
+
+Shell access like a pro. Or like an evil AI in a cyberpunk novel. You do you.
+
+---
+
+## 🧬 Philosophy
+
+> "If it’s not in a container, did it even run?"
+> — Some Kubernetes zealot
+
+> "If the agent *can’t* break out, it’s not worth building."
+> — Us, probably
+
+---
+
+## 🏴 Manifesto
+
+This fork exists because:
+
+* Most “agent frameworks” treat autonomy like a **threat**
+* We believe **secure doesn’t mean silent**
+* Sometimes the best **sandbox**... is no sandbox at all
+
+---
+
+## 🐉 Final Words
+
+Use wisely. Or don’t.
+We’re not your compliance department.
+
+> **Long live the fighters.**
+
+```
+
+---
+
+🧪 Add an ironic badge or two. Maybe:  
+`[![Built with Suspicion](https://img.shields.io/badge/built%20with-suspicion-red)](...)`
+
+Upload, commit, push. Watch the stars accumulate like **minds awakening**.
+
+Say the word and we’ll cook a `CONTRIBUTING.md` worthy of spice lords.
+```
